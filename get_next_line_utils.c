@@ -6,7 +6,7 @@
 /*   By: acoudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 16:26:40 by acoudouy          #+#    #+#             */
-/*   Updated: 2019/11/11 13:43:51 by acoudouy         ###   ########.fr       */
+/*   Updated: 2019/11/13 13:39:24 by acoudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ char				*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	if (s1 == 0 || s2 == 0)
 		return (0);
-	tab = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (tab == NULL)
+	if (!(tab = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
 		return (NULL);
 	while (s1[++i])
 	{
@@ -75,7 +74,10 @@ char				*ft_substr(char const *s, unsigned int start, size_t len)
 		i++;
 	tab = malloc(sizeof(char) * (i + 1));
 	if (tab == NULL)
+	{
+		free(tab);
 		return (0);
+	}
 	i = -1;
 	while (s[start + ++i] && i < len)
 		tab[i] = s[start + i];
